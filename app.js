@@ -23,6 +23,8 @@ function Colors() {
   this.green = 'rgba(0, 230, 0, 1)';
   this.blue = 'rgba(0, 0, 230, 1)';
   this.electricBlue = 'rgba(20, 30, 230, 1)';
+  this.boxColorOn = 'rgba(127, 255, 212,1)';
+  this.boxColorOff = 'rgba(126, 126, 126, 1)';
 }
 
 var State = {
@@ -96,41 +98,6 @@ function updateKeysTotal() {
   }
   State.totalKeysDown = total;
 }
-
-function Box(x,y,color,size,vel) {
-  this.x = x;
-  this.y = y;
-  this.color = color;
-  this.size =  size;
-  this.xVel = vel;
-  this.yVel = vel;
-
-  this.draw = function() {
-    ctx.beginPath();
-    ctx.rect(this.x,this.y,this.size,this.size);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-    // ctx.stroke();
-  };
-
-  this.update = function() {
-    if ((this.xVel > 0) && ((this.x + this.size + this.xVel) > canW/4)) {
-      this.xVel *= -1;
-    }
-    if ((this.xVel < 0) && ((this.x + this.xVel) < 0)) {
-      this.xVel *= -1;
-    }
-    if ((this.yVel > 0) && ((this.y + this.size + this.yVel) > canH/4)) {
-      this.yVel *= -1;
-    }
-    if ((this.yVel < 0) && ((this.y + this.yVel) < 0)) {
-      this.yVel *= -1;
-    }
-    this.x += this.xVel;
-    this.y += this.yVel;
-  };
-
-} // end box
 
 //////////////////////////////////////////////////////////////////////////////////
 // KEYBOARD INPUT

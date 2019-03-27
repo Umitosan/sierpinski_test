@@ -24,18 +24,25 @@ function getNewTriXY(x,y,w,h,recurLevel) {
   }
 }
 
+
+
+
+
 function TriGroup() {
   this.x = canW / 2;  // top of the triangle
   this.y = 0;         // top of the triangle
   this.width = canW;
   this.height = canH;
   this.currentDepth = 0;
+  this.clock = 1;
+  this.lastClockTick = undefined;
 
   this.init = function() {
     tris = [];
     tris.push(new Tri(this.x,this.y,this.width,this.height));
     getNewTriXY(this.x,this.y,this.width,this.height,0);
     console.log('totalRecursions = ', totalRecursions);
+    this.lastClockTick = performance.now();
   };
 
   this.draw = function() {
@@ -48,9 +55,22 @@ function TriGroup() {
   };
 
   this.update = function() {
-    // for (let i = 0; i < tris.length; i++) {
-    //   tris[i].update();
-    // }
+    if (DEPTH < 6) {
+      if ((performance.now() % 1000) <= 17) {
+        let diff = performance.now() - this.lastClockTick;
+        this.lastClockTick = performance.now();
+        if (this.clock === 1) {
+          this.clock = 0;
+          console.log('----TICK--------'+diff);
+        } else {
+          this.clock = 1;
+          console.log('--------TOCK----'+diff);
+        }
+        for (let i = 0; i < tris.length; i++) {
+          tris[i].lineColor = randColor('rgba');
+        }
+      }
+    }
   };
 
 }
@@ -62,7 +82,7 @@ function Tri(x,y,w,h) {
   this.y = y;
   this.width = w;
   this.height = h;
-  this.lineColor = myColors.red;
+  this.lineColor = myColors.boxColorOn;
   this.fillColor = myColors.green;
 
   this.init = function() {
@@ -83,8 +103,8 @@ function Tri(x,y,w,h) {
     ctx.lineTo(this.width/2,this.height);
     ctx.lineTo(-this.width/2,this.height);
     ctx.lineTo(0,0);
-    ctx.fillStyle = myColors.blue;
-    ctx.strokeStyle = myColors.green;
+    ctx.fillStyle = this.fillColor;
+    ctx.strokeStyle = this.lineColor;
     ctx.stroke();
     // ctx.fill();
     ctx.restore();
