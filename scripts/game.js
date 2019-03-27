@@ -51,7 +51,8 @@ function Game(updateDur) {
 
   this.init = function() {
     this.bg.src = 'bg1.png';
-    this.boxy = new Box(20,20,myColors.boxColorOn,20,1);
+    // Box(x,y,color,size,vel)
+    this.boxy = new Box(20,20,myColors.boxColorOn,10,0.6);
     this.myTriGroup = new TriGroup();
     this.myTriGroup.init();
     this.lastUpdate = performance.now();

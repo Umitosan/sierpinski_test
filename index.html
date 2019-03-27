@@ -20,79 +20,24 @@
         <span id="title">Sierpinski Triangle</span>
       </div>
 
-      <!-- <div class="speed-container">
-        <span class="speed-label">Game Speed</span>
-        <input id="speed-slider" type="range" name="speed-slider" min="1" max="200" step="1" value="61">
-        <input id="speed-input" type="number" name="speed-input" value="61" min="1" max="200">
-        <span class="speed-label">(updates/sec)</span>
-      </div> -->
-
-      <div class="status-container">
-        <div class="mode-container">
-          <div>
-            MODE:
-          </div>
-          <div>
-            <span id="mode-current-status">draw</span>
-          </div>
-        </div>
-        <div class="lastkey-container">
-          <div>
-            "Last Key" (key code):
-          </div>
-          <div>
-            <span id="lastkey-name">---</span>
-            -
-            <span id="lastkey-code">---</span>
-          </div>
-        </div>
-        <div class="coords-container">
-          <div id="coords">
-            <div>
-              Mouse Coords
-            </div>
-            <div>
-              X: <span id="coords-x">0</span> Y: <span id="coords-y">0</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="keys-container">
-        <div class="keys-main">
-          <div class="keys-group-dir">
-            <div class="keys-item ki-title">
-              WASD
-            </div>
-            <div class="keys-item gap"></div>
-            <div class="keys-item" id="key-W">W</div>
-            <div class="keys-item gap"></div>
-            <div class="keys-item" id="key-A">A</div>
-            <div class="keys-item" id="key-S">S</div>
-            <div class="keys-item" id="key-D">D</div>
-          </div>
-          <div class="keys-group-dir">
-            <div class="keys-item ki-title">
-              Arrows
-            </div>
-            <div class="keys-item gap"></div>
-            <div class="keys-item" id="key-up">Up</div>
-            <div class="keys-item gap"></div>
-            <div class="keys-item" id="key-left">Left</div>
-            <div class="keys-item" id="key-down">Down</div>
-            <div class="keys-item" id="key-right">Right</div>
-          </div>
-        </div>
-      </div>
-
       <div class="buttons-container">
         <button id="start-btn" type="button" name="start">START</button>
         <button id="pause-btn" type="button" name="pause">PAUSE</button>
         <button id="reset-btn" type="button" name="reset">RESET</button>
       </div>
 
+      <div class="buttons-container bc2">
+        <button id="Random-btn" type="button" name="fill">RANDOM</button>
+        <button id="fill-btn" type="button" name="fill">FILL</button>
+        <div class="input-conain">
+          <div class="inp-lbl">Depth</div>
+          <input type="text" name="depth" placeholder="(1-10)" value="7">
+        </div>
+      </div>
+
+
       <div class="canvas-container">
-        <canvas id="canvas" tabindex='1' width="800" height="800"></canvas>
+        <canvas id="canvas" tabindex='1' width="1000" height="900"></canvas>
       </div>
 
     </div>

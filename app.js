@@ -60,6 +60,8 @@ function softReset() {
   myGame = undefined;
   tris = undefined;
   totalRecursions = 0;
+  fill = false;
+  randomize = false
   State = {
     myReq: undefined,
     loopRunning: false,
@@ -335,30 +337,27 @@ $(document).ready(function() {
   State.gameStarted = false;
   myGame.mode = 'draw';
 
+  myGame.mode = 'sim';
+  console.log('mode now sim');
+  State.gameStarted = true;
+  // $('#mode-current-status')[0].innerText = 'simulate';
+
   $('#start-btn').click(function() {
-    console.log("start button clicked");
-    if (myGame.mode === 'draw') {
-      myGame.mode = 'sim';
-      console.log('mode now sim');
-      State.gameStarted = true;
-      $('#mode-current-status')[0].innerText = 'simulate';
-      let v = $('#speed-slider').val();
-      $('#speed-input').prop("value", v);
-      myGame.updateDuration = (1000/v);
-      myGame.lastUpdate = performance.now();
-    } else {
-      console.log('must reset before starting again');
-    }
+    console.log("reset button clicked");
+    generalLoopReset();
+    State.loopRunning = true;
+    State.gameStarted = true;
+    myGame.mode = 'sim';
+    $('#pause-btn')[0].innerText = 'PAUSE';
   });
 
   $('#reset-btn').click(function() {
     console.log("reset button clicked");
     generalLoopReset();
     State.loopRunning = true;
-    State.gameStarted = false;
-    myGame.mode = 'draw';
+    State.gameStarted = true;
+    myGame.mode = 'sim';
     $('#pause-btn')[0].innerText = 'PAUSE';
-    $('#mode-current-status')[0].innerText = 'draw';
   });
 
   $('#pause-btn').click(function() {
@@ -369,30 +368,6 @@ $(document).ready(function() {
     } else if (myGame.paused === true) {
       myGame.unpauseIt();
       $('#pause-btn')[0].innerText = 'PAUSE';
-    }
-  });
-
-  //INPUT
-  $('#speed-slider').mousedown(function(e1) {
-    leftMouseDown = true;
-  }).mouseup(function(e2) {
-    leftMouseDown = false;
-  });
-  $('#speed-input').on('change', function(e) {
-    let v = this.value;
-    $('#speed-slider').prop("value", v);
-    if (myGame.mode === 'sim') {
-      myGame.updateDuration = (1000/v);
-    }
-  });
-
-  $('#speed-slider').mousemove(function(e) {
-    if (leftMouseDown === true) {
-      let v = this.value;
-      $('#speed-input').prop("value", v);
-      if (myGame.mode === 'sim') {
-        myGame.updateDuration = (1000/v);
-      }
     }
   });
 

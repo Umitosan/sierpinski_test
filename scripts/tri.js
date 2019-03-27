@@ -4,6 +4,8 @@
 var DEPTH = 6;
 var tris;
 var totalRecursions = 0;
+var randomize = false;
+var fill = false;
 
 function getNewTriXY(x,y,w,h,recurLevel) {
   let curLvl = recurLevel;
@@ -29,18 +31,23 @@ function getNewTriXY(x,y,w,h,recurLevel) {
 
 
 function TriGroup() {
+  // small pixel offsets are to show borders better
   this.x = canW / 2;  // top of the triangle
-  this.y = 0;         // top of the triangle
-  this.width = canW;
-  this.height = canH;
+  this.y = 1;         // top of the triangle
+  this.width = canW-2;
+  this.height = canH-2;
   this.currentDepth = 0;
   this.clock = 1;
   this.lastClockTick = undefined;
+  this.clockTimer = 3000;
 
   this.init = function() {
     tris = [];
     tris.push(new Tri(this.x,this.y,this.width,this.height));
     getNewTriXY(this.x,this.y,this.width,this.height,0);
+    for (let i = 0; i < tris.length; i++) {
+      tris[i].init();
+    }
     console.log('totalRecursions = ', totalRecursions);
     this.lastClockTick = performance.now();
   };
@@ -55,8 +62,8 @@ function TriGroup() {
   };
 
   this.update = function() {
-    if (DEPTH < 6) {
-      if ((performance.now() % 1000) <= 17) {
+    if (randomize) {
+      if ((performance.now() - this.lastClockTick) > this.clockTimer) {
         let diff = performance.now() - this.lastClockTick;
         this.lastClockTick = performance.now();
         if (this.clock === 1) {
@@ -68,6 +75,7 @@ function TriGroup() {
         }
         for (let i = 0; i < tris.length; i++) {
           tris[i].lineColor = randColor('rgba');
+          tris[i].fillColor = randColor('rgba');
         }
       }
     }
@@ -82,31 +90,43 @@ function Tri(x,y,w,h) {
   this.y = y;
   this.width = w;
   this.height = h;
+  this.baseLineColor = myColors.boxColorOn;
   this.lineColor = myColors.boxColorOn;
-  this.fillColor = myColors.green;
+  this.fillColor = randColor('rgba');
+  this.lineW = 0.7;
 
   this.init = function() {
+    // this.x = Math.round(this.x);
+    // this.y = Math.round(this.y);
   };
 
   this.draw = function() {
     // box at top for indication
     // ctx.beginPath();
     // ctx.fillStyle = myColors.red;
-    // ctx.rect(this.x-2,this.y-2,4,4);
+    // ctx.rect(this.x-1,this.y-1,2,2);
     // ctx.fill();
 
     ctx.save();
     ctx.beginPath();
-    ctx.lineWidth = 1;
+    ctx.lineWidth = this.lineW;
     ctx.translate(this.x,this.y);
     ctx.moveTo(0,0);
     ctx.lineTo(this.width/2,this.height);
     ctx.lineTo(-this.width/2,this.height);
     ctx.lineTo(0,0);
+    // ctx.lineTo(0,this.height);
     ctx.fillStyle = this.fillColor;
-    ctx.strokeStyle = this.lineColor;
-    ctx.stroke();
-    // ctx.fill();
+    if (randomize) {
+      ctx.strokeStyle = this.lineColor;
+    } else {
+      ctx.strokeStyle = this.baseLineColor;
+    }
+    if (fill) {
+      ctx.fill();
+    } else {
+      ctx.stroke();
+    }
     ctx.restore();
   };
 
