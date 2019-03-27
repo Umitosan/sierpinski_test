@@ -11,7 +11,7 @@ body {
 }
 
 .main-container {
-  width: 1100px;
+  width: 1200px;
   height: 100%;
   margin: 20px auto 20px auto;
   /* border-color: black;
@@ -27,50 +27,6 @@ body {
 #title {
   font-size: 40px;
   font-family: sans-serif;
-}
-
-
-
-
-
-.keys-container {
-  height: auto;
-  width: 330px;
-  margin: 0px auto 20px auto;
-  /* outline-color: darkblue;
-  outline-style: solid;
-  outline-width: 1px; */
-}
-.keys-main {
-  display: inline-flex;
-  height: auto;
-  width: auto;
-  margin: 0px auto 0px auto;
-}
-.keys-group-dir {
-  margin: 0px 1px 0px 1px;
-  display: grid;
-  grid-template-columns: 50px 50px 50px;
-  grid-template-rows: 20px 50px 50px;
-  background-color: #3e2723;
-  padding: 6px;
-  border-radius: 4px;
-}
-.keys-item {
-  background-color: lightblue;
-  outline: 1px solid #3e2723;
-  padding: 20px 0px 0px 0px;
-  font-size: 14px;
-  text-align: center;
-  border-radius: 4px;
-}
-.gap {
-  background-color: #3e2723;
-}
-.ki-title {
-  padding: 2px;
-  grid-column-start: 1;
-  grid-column-end: 4;
 }
 
 
@@ -151,8 +107,8 @@ body {
 
 .canvas-container {
   margin: 20px auto 20px auto;
-  width: 1002px;
-  height: 902px;
+  width: 1202px;
+  height: 1002px;
   /* outline-color: red;
   outline-style: solid;
   outline-width: 1px; */

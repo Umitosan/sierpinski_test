@@ -68,10 +68,10 @@ function TriGroup() {
         this.lastClockTick = performance.now();
         if (this.clock === 1) {
           this.clock = 0;
-          console.log('----TICK--------'+diff);
+          // console.log('----TICK--------'+diff);
         } else {
           this.clock = 1;
-          console.log('--------TOCK----'+diff);
+          // console.log('--------TOCK----'+diff);
         }
         for (let i = 0; i < tris.length; i++) {
           tris[i].lineColor = randColor('rgba');

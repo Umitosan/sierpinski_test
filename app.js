@@ -61,7 +61,7 @@ function softReset() {
   tris = undefined;
   totalRecursions = 0;
   fill = false;
-  randomize = false
+  randomize = false;
   State = {
     myReq: undefined,
     loopRunning: false,
@@ -370,5 +370,49 @@ $(document).ready(function() {
       $('#pause-btn')[0].innerText = 'PAUSE';
     }
   });
+
+  let randomBtnDown = false;
+  $('#random-btn').click(function() {
+    if (randomBtnDown) {
+      resetRandState();
+      randomBtnDown = false;
+    } else {
+      resetRandState();
+      randomize = true;
+      $('#random-btn').css("background-color","pink");
+      $('#random-btn').css("order-color","pink");
+      for (let i = 0; i < tris.length; i++) {
+        tris[i].lineColor = randColor('rgba');
+        tris[i].fillColor = randColor('rgba');
+      }
+      randomBtnDown = true;
+      fillBtnDown = false;
+    }
+  });
+
+  let fillBtnDown = false;
+  $('#fill-btn').click(function() {
+    if (fillBtnDown) {
+      resetRandState();
+      fillBtnDown = false;
+    } else {
+      resetRandState();
+      fill = true;
+      randomize = true;
+      $('#fill-btn').css("background-color","pink");
+      $('#fill-btn').css("border-color","pink");
+      fillBtnDown = true;
+      randomBtnDown = false;
+    }
+  });
+
+  function resetRandState() {
+    randomize = false;
+    fill = false;
+    $('#random-btn').css("background-color","lightgreen");
+    $('#random-btn').css("border-color","green");
+    $('#fill-btn').css("background-color","lightgreen");
+    $('#fill-btn').css("border-color","green");
+  }
 
 });
