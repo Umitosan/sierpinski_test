@@ -1,7 +1,7 @@
 /*jshint esversion: 6 */
 
 
-var DEPTH = 4;
+var DEPTH = 6;
 var tris;
 var totalRecursions = 0;
 
@@ -62,16 +62,18 @@ function Tri(x,y,w,h) {
   this.y = y;
   this.width = w;
   this.height = h;
-  this.color = myColors.red;
+  this.lineColor = myColors.red;
+  this.fillColor = myColors.green;
 
   this.init = function() {
   };
 
   this.draw = function() {
-    ctx.beginPath();
-    ctx.fillStyle = myColors.red;
-    ctx.rect(this.x-2,this.y-2,4,4);
-    ctx.fill();
+    // box at top for indication
+    // ctx.beginPath();
+    // ctx.fillStyle = myColors.red;
+    // ctx.rect(this.x-2,this.y-2,4,4);
+    // ctx.fill();
 
     ctx.save();
     ctx.beginPath();

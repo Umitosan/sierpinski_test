@@ -114,13 +114,13 @@ function Box(x,y,color,size,vel) {
   };
 
   this.update = function() {
-    if ((this.xVel > 0) && ((this.x + this.size + this.xVel) > canW)) {
+    if ((this.xVel > 0) && ((this.x + this.size + this.xVel) > canW/4)) {
       this.xVel *= -1;
     }
     if ((this.xVel < 0) && ((this.x + this.xVel) < 0)) {
       this.xVel *= -1;
     }
-    if ((this.yVel > 0) && ((this.y + this.size + this.yVel) > canH)) {
+    if ((this.yVel > 0) && ((this.y + this.size + this.yVel) > canH/4)) {
       this.yVel *= -1;
     }
     if ((this.yVel < 0) && ((this.y + this.yVel) < 0)) {
