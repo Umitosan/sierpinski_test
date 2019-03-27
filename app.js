@@ -298,6 +298,19 @@ function gameLoop(timestamp) {
 
 }
 
+
+
+
+function resetRandState() {
+  randomize = false;
+  fill = false;
+  $('#random-btn').css("background-color","lightgreen");
+  $('#random-btn').css("border-color","green");
+  $('#fill-btn').css("background-color","lightgreen");
+  $('#fill-btn').css("border-color","green");
+}
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).ready(function() {
 
@@ -349,6 +362,7 @@ $(document).ready(function() {
     State.gameStarted = true;
     myGame.mode = 'sim';
     $('#pause-btn')[0].innerText = 'PAUSE';
+    resetRandState();
   });
 
   $('#reset-btn').click(function() {
@@ -358,6 +372,7 @@ $(document).ready(function() {
     State.gameStarted = true;
     myGame.mode = 'sim';
     $('#pause-btn')[0].innerText = 'PAUSE';
+    resetRandState();
   });
 
   $('#pause-btn').click(function() {
@@ -406,13 +421,15 @@ $(document).ready(function() {
     }
   });
 
-  function resetRandState() {
-    randomize = false;
-    fill = false;
-    $('#random-btn').css("background-color","lightgreen");
-    $('#random-btn').css("border-color","green");
-    $('#fill-btn').css("background-color","lightgreen");
-    $('#fill-btn').css("border-color","green");
-  }
+  $('#depth').on('change', function(e) {
+    let newDepth = parseInt($("#depth").val());
+    DEPTH = newDepth;
+    generalLoopReset();
+    State.loopRunning = true;
+    State.gameStarted = true;
+    myGame.mode = 'sim';
+    $('#pause-btn')[0].innerText = 'PAUSE';
+    resetRandState();
+  });
 
 });

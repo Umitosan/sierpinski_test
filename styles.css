@@ -47,20 +47,23 @@ body {
   outline-width: 1px; */
 }
 .input-conain {
-  width: 100px;
-  display: inline-flex;
-  font-weight: 600;
+  height: auto;
+  float: right;
+  margin: 2px 30px auto auto;
+  font-weight: 500;
   color: black;
   /* outline-color: blue;
   outline-style: solid;
   outline-width: 1px; */
 }
-.input-conain label {
+.inp-lbl {
   margin-right: 10px;
+  margin: 0px 0px 4px 0px;
 }
 .input-conain input {
+  background-color: lightgrey;
   width: 40px;
-  height: auto;
+  height: 20px;
   margin: 0px auto;
 }
 .buttons-container button {
