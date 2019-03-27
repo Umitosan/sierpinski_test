@@ -56,6 +56,8 @@ var State = {
 function softReset() {
   console.log('soft reset!');
   myGame = undefined;
+  tris = undefined;
+  totalRecursions = 0;
   State = {
     myReq: undefined,
     loopRunning: false,

@@ -12,10 +12,13 @@ function Game(updateDur) {
   this.boxy = undefined;
   this.pausedTxt = undefined;
   this.mode = 'init';
+  this.triGroup = undefined;
 
   this.init = function() {
     this.bg.src = 'bg1.png';
     this.boxy = new Box(20,20,myColors.red,20,1);
+    this.triGroup = new TriGroup();
+    this.triGroup.init();
     this.lastUpdate = performance.now();
   };
 
@@ -38,6 +41,7 @@ function Game(updateDur) {
 
   this.draw = function() {  // draw everything!
     this.boxy.draw();
+    this.triGroup.draw();
   }; // end draw
 
   this.update = function() {
