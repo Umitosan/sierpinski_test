@@ -7,11 +7,11 @@ var totalRecursions = 0;
 var randomize = false;
 var fill = false;
 
-function getNewTriXY(x,y,w,h,recurLevel) {
+function getNewTriXY(x,y,w,h,recurLevel,colorFam) {
   let curLvl = recurLevel;
-  let newTriTop = new Tri(x, y, w/2, h/2);
-  let newTriLeft = new Tri(x-(w/4),y+(h/2),w/2,h/2);
-  let newTriRight = new Tri(x+(w/4), y+(h/2), w/2, h/2);
+  let newTriTop = new Tri(x, y, w/2, h/2, colorFam);
+  let newTriLeft = new Tri(x-(w/4),y+(h/2),w/2,h/2, colorFam);
+  let newTriRight = new Tri(x+(w/4), y+(h/2), w/2, h/2, colorFam);
   tris.push(newTriTop);
   tris.push(newTriLeft);
   tris.push(newTriRight);
@@ -20,9 +20,15 @@ function getNewTriXY(x,y,w,h,recurLevel) {
     // console.log('depth met, recursions = ', totalRecursions);
     return;
   } else {
-    getNewTriXY(x, y, w/2, h/2,curLvl+1);
-    getNewTriXY(x-(w/4), y+(h/2), w/2, h/2,curLvl+1);
-    getNewTriXY(x+(w/4), y+(h/2), w/2, h/2,curLvl+1);
+    if (curLvl === 0) {
+      getNewTriXY(x, y, w/2, h/2, curLvl+1, 'red');
+      getNewTriXY(x-(w/4), y+(h/2), w/2, h/2, curLvl+1, 'green');
+      getNewTriXY(x+(w/4), y+(h/2), w/2, h/2, curLvl+1, 'blue');
+    } else {
+      getNewTriXY(x, y, w/2, h/2, curLvl+1, colorFam);
+      getNewTriXY(x-(w/4), y+(h/2), w/2, h/2, curLvl+1, colorFam);
+      getNewTriXY(x+(w/4), y+(h/2), w/2, h/2, curLvl+1, colorFam);
+    }
   }
 }
 
@@ -44,7 +50,7 @@ function TriGroup() {
   this.init = function() {
     tris = [];
     tris.push(new Tri(this.x,this.y,this.width,this.height));
-    getNewTriXY(this.x,this.y,this.width,this.height,0);
+    getNewTriXY(this.x,this.y,this.width,this.height,0,'nothin');
     for (let i = 0; i < tris.length; i++) {
       tris[i].init();
     }
@@ -75,7 +81,7 @@ function TriGroup() {
         }
         for (let i = 0; i < tris.length; i++) {
           tris[i].lineColor = randColor('rgba');
-          tris[i].fillColor = randColor('rgba');
+          // tris[i].fillColor = randColor('rgba');
         }
       }
     }
@@ -85,19 +91,26 @@ function TriGroup() {
 
 
 
-function Tri(x,y,w,h) {
+function Tri(x,y,w,h,colorFam) {
   this.x = x;
   this.y = y;
   this.width = w;
   this.height = h;
   this.baseLineColor = myColors.boxColorOn;
   this.lineColor = myColors.boxColorOn;
-  this.fillColor = randColor('rgba');
+  this.fillColor = undefined;
   this.lineW = 0.7;
 
   this.init = function() {
-    // this.x = Math.round(this.x);
-    // this.y = Math.round(this.y);
+    if (colorFam === 'red') {
+      this.fillColor = randRed();
+    } else if (colorFam === 'green') {
+      this.fillColor = randGreen();
+    } else if (colorFam === 'blue') {
+      this.fillColor = randBlue();
+    } else {
+      // nothin
+    }
   };
 
   this.draw = function() {

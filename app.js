@@ -398,7 +398,7 @@ $(document).ready(function() {
       $('#random-btn').css("order-color","pink");
       for (let i = 0; i < tris.length; i++) {
         tris[i].lineColor = randColor('rgba');
-        tris[i].fillColor = randColor('rgba');
+        // tris[i].fillColor = randColor('rgba');
       }
       randomBtnDown = true;
       fillBtnDown = false;
