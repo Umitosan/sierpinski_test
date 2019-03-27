@@ -1,21 +1,24 @@
 /*jshint esversion: 6 */
 
 
-var DEPTH = 3;
+var DEPTH = 4;
 var tris;
 var totalRecursions = 0;
 
 function getNewTriXY(x,y,w,h,recurLevel) {
   let curLvl = recurLevel;
+  let newTriTop = new Tri(x, y, w/2, h/2);
   let newTriLeft = new Tri(x-(w/4),y+(h/2),w/2,h/2);
   let newTriRight = new Tri(x+(w/4), y+(h/2), w/2, h/2);
+  tris.push(newTriTop);
   tris.push(newTriLeft);
   tris.push(newTriRight);
+  totalRecursions += 1;
   if (curLvl >= DEPTH) {
-    console.log('depth met, recursions = ', totalRecursions);
+    // console.log('depth met, recursions = ', totalRecursions);
     return;
   } else {
-    totalRecursions += 1;
+    getNewTriXY(x, y, w/2, h/2,curLvl+1);
     getNewTriXY(x-(w/4), y+(h/2), w/2, h/2,curLvl+1);
     getNewTriXY(x+(w/4), y+(h/2), w/2, h/2,curLvl+1);
   }
@@ -67,12 +70,12 @@ function Tri(x,y,w,h) {
   this.draw = function() {
     ctx.beginPath();
     ctx.fillStyle = myColors.red;
-    ctx.rect(this.x-3,this.y-3,6,6);
+    ctx.rect(this.x-2,this.y-2,4,4);
     ctx.fill();
 
     ctx.save();
     ctx.beginPath();
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1;
     ctx.translate(this.x,this.y);
     ctx.moveTo(0,0);
     ctx.lineTo(this.width/2,this.height);

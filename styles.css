@@ -213,7 +213,7 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 .canvas-container {
   margin: 20px auto 20px auto;
   width: 802px;
-  height: 602px;
+  height: 802px;
   /* outline-color: red;
   outline-style: solid;
   outline-width: 1px; */
