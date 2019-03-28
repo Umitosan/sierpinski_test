@@ -302,8 +302,6 @@ function gameLoop(timestamp) {
 
 
 function resetRandState() {
-  randomize = false;
-  fill = false;
   $('#random-btn').css("background-color","lightgreen");
   $('#random-btn').css("border-color","green");
   $('#fill-btn').css("background-color","lightgreen");
@@ -314,10 +312,6 @@ function resetRandState() {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $(document).ready(function() {
 
-  function test() {
-    console.log('test works');
-  }
-
   CANVAS =  $('#canvas')[0];
   ctx =  CANVAS.getContext('2d');
   canH = CANVAS.height;
@@ -327,13 +321,13 @@ $(document).ready(function() {
   CANVAS.addEventListener("mousedown", mDown);
   CANVAS.addEventListener("mouseup", mUp);
   $('body').on('contextmenu', '#canvas', function(e){ return false; }); // prevent right click context menu default action
-  CANVAS.addEventListener('mousemove', function(evt) {
-      let rect = CANVAS.getBoundingClientRect();
-      State.mouseX = evt.clientX - rect.left + -0.5;
-      State.mouseY = evt.clientY - rect.top;
-      $("#coords-x").text(State.mouseX);
-      $("#coords-y").text(State.mouseY);
-  }, false);
+  // CANVAS.addEventListener('mousemove', function(evt) {
+  //     let rect = CANVAS.getBoundingClientRect();
+  //     State.mouseX = evt.clientX - rect.left + -0.5;
+  //     State.mouseY = evt.clientY - rect.top;
+  //     $("#coords-x").text(State.mouseX);
+  //     $("#coords-y").text(State.mouseY);
+  // }, false);
 
   //INPUT
   var leftMouseDown = false;
@@ -390,9 +384,12 @@ $(document).ready(function() {
   $('#random-btn').click(function() {
     if (randomBtnDown) {
       resetRandState();
+      fill = false;
+      randomize = false;
       randomBtnDown = false;
     } else {
       resetRandState();
+      fill = false;
       randomize = true;
       $('#random-btn').css("background-color","pink");
       $('#random-btn').css("order-color","pink");
@@ -409,6 +406,8 @@ $(document).ready(function() {
   $('#fill-btn').click(function() {
     if (fillBtnDown) {
       resetRandState();
+      fill = false;
+      randomize = false;
       fillBtnDown = false;
     } else {
       resetRandState();
